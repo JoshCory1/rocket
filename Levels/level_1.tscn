@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://csb7f1dsuifmu"]
+
+[ext_resource type="PackedScene" uid="uid://eae5wuekvcv6" path="res://player.tscn" id="1_ng6g1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l6il3"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_energy_multiplier = 2.65
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_lbu3l"]
+sky_material = SubResource("ProceduralSkyMaterial_l6il3")
+
+[sub_resource type="Environment" id="Environment_721b1"]
+background_mode = 2
+sky = SubResource("Sky_lbu3l")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3kyc"]
+albedo_color = Color(0.360784, 0.380392, 0.121569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10vug"]
+albedo_color = Color(0, 1, 0.333333, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmot8"]
+albedo_color = Color(0.129412, 0.435294, 1, 1)
+
+[node name="Level_1" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.450417, -0.458532, 0.766077, -0.21709, 0.776045, 0.592137, 0, 6.02382, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_721b1")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+use_collision = true
+size = Vector3(30, 8, 5)
+material = SubResource("StandardMaterial3D_q3kyc")
+
+[node name="landing_pad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.85025, 0.2, 0)
+use_collision = true
+size = Vector3(2, 0.4, 2)
+material = SubResource("StandardMaterial3D_10vug")
+
+[node name="launch_pad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.71222, 0.2, 0)
+use_collision = true
+size = Vector3(2, 0.4, 2)
+material = SubResource("StandardMaterial3D_dmot8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.989016, 0.147809, 0, -0.147809, 0.989016, 0, 4.296, 6.537)
+
+[node name="Player" parent="." instance=ExtResource("1_ng6g1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.71739, 1.47442, 0)
