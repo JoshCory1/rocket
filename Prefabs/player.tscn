@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://eae5wuekvcv6"]
 
-[ext_resource type="Script" path="res://Prefabs/Player.gd" id="1_tildh"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_4dmj4"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5cqnk"]
 
@@ -10,12 +10,16 @@
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
+max_contacts_reported = 10
+contact_monitor = true
 linear_damp = 1.0
 angular_damp = 3.0
-script = ExtResource("1_tildh")
+script = ExtResource("1_4dmj4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_5cqnk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_t52lq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
